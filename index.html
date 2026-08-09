@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DTH — Digital Time & History</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+    --bg:#070a10;
+    --card:#10151d;
+    --card2:#151b24;
+    --line:#252d38;
+    --text:#f4f6f8;
+    --muted:#8b95a4;
+    --gold:#d8ad59;
+    --gold2:#f0ce7a;
+}
+
+body{
+    min-height:100vh;
+    background:
+        radial-gradient(circle at 15% 5%,rgba(216,173,89,.09),transparent 30%),
+        radial-gradient(circle at 90% 90%,rgba(65,90,120,.12),transparent 35%),
+        var(--bg);
+    color:var(--text);
+    font-family:Inter,Segoe UI,Arial,sans-serif;
+}
+
+.wrapper{
+    width:min(1100px,94%);
+    margin:auto;
+    padding:28px 0 60px;
+}
+
+header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:55px;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
+
+.logo{
+    width:58px;
+    height:58px;
+    border:1px solid rgba(216,173,89,.5);
+    border-radius:17px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(145deg,#171d26,#0c1016);
+    box-shadow:0 10px 35px rgba(0,0,0,.35);
+    position:relative;
+}
+
+.logo:before{
+    content:"";
+    position:absolute;
+    inset:8px;
+    border:1px solid rgba(216,173,89,.45);
+    border-radius:12px;
+}
+
+.logo span{
+    position:relative;
+    color:var(--gold2);
+    font-weight:900;
+    font-size:14px;
+    letter-spacing:1px;
+}
+
+.brand h1{
+    font-size:21px;
+    letter-spacing:4px;
+}
+
+.brand p{
+    margin-top:4px;
+    color:var(--muted);
+    font-size:10px;
+    letter-spacing:2px;
+}
+
+.badge{
+    border:1px solid var(--line);
+    border-radius:30px;
+    padding:9px 14px;
+    color:var(--muted);
+    font-size:11px;
+}
+
+.hero{
+    text-align:center;
+    margin-bottom:35px;
+}
+
+.hero h2{
+    font-size:clamp(30px,5vw,50px);
+    letter-spacing:-1.5px;
+}
+
+.hero h2 span{
+    color:var(--gold2);
+}
+
+.hero p{
+    max-width:650px;
+    margin:14px auto 0;
+    color:var(--muted);
+    line-height:1.7;
+    font-size:14px;
+}
+
+.panel{
+    background:linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.015));
+    border:1px solid var(--line);
+    border-radius:23px;
+    padding:27px;
+    box-shadow:0 25px 70px rgba(0,0,0,.3);
+}
+
+.form{
+    display:grid;
+    grid-template-columns:1.2fr 1fr 1fr;
+    gap:17px;
+}
+
+label{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:8px;
+    color:#b5beca;
+    font-size:12px;
+}
+
+.optional{
+    color:#687383;
+}
+
+input{
+    width:100%;
+    height:52px;
+    padding:0 14px;
+    background:#0b1017;
+    color:#fff;
+    border:1px solid #29313c;
+    border-radius:12px;
+    outline:none;
+    font-size:14px;
+}
+
+input:focus{
+    border-color:var(--gold);
+    box-shadow:0 0 0 3px rgba(216,173,89,.08);
+}
+
+.note{
+    grid-column:1/-1;
+    color:#717c8b;
+    font-size:12px;
+}
+
+.note b{color:var(--gold2)}
+
+button{
+    grid-column:1/-1;
+    height:53px;
+    border:0;
+    border-radius:12px;
+    cursor:pointer;
+    font-weight:800;
+    color:#111;
+    background:linear-gradient(135deg,#b98939,#e5bf68);
+    transition:.25s;
+}
+
+button:hover{
+    transform:translateY(-2px);
+    box-shadow:0 12px 30px rgba(216,173,89,.2);
+}
+
+.loading{
+    display:none;
+    text-align:center;
+    padding:35px;
+}
+
+.loading.show{display:block}
+
+.loader{
+    width:36px;
+    height:36px;
+    margin:auto;
+    border:3px solid #252d38;
+    border-top-color:var(--gold);
+    border-radius:50%;
+    animation:spin .8s linear infinite;
+}
+
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.loading p{
+    margin-top:13px;
+    color:var(--muted);
+    font-size:12px;
+}
+
+.result{
+    display:none;
+    margin-top:30px;
+}
+
+.result.show{
+    display:block;
+}
+
+.result-title{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.result-title h3{
+    font-size:24px;
+}
+
+.result-title p{
+    color:var(--muted);
+    margin-top:7px;
+    font-size:13px;
+}
+
+.counters{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    gap:10px;
+}
+
+.counter{
+    min-height:130px;
+    background:linear-gradient(145deg,#141a23,#0d1219);
+    border:1px solid var(--line);
+    border-radius:16px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    position:relative;
+    overflow:hidden;
+}
+
+.counter:before{
+    content:"";
+    position:absolute;
+    top:0;
+    width:55%;
+    height:1px;
+    background:linear-gradient(90deg,transparent,var(--gold),transparent);
+}
+
+.number{
+    font-size:32px;
+    font-weight:800;
+    height:45px;
+    display:flex;
+    align-items:center;
+}
+
+.number.animate{
+    animation:flip .65s cubic-bezier(.2,.8,.2,1);
+}
+
+@keyframes flip{
+    0%{
+        opacity:0;
+        transform:translateY(-35px) rotateX(80deg) scale(.7);
+        filter:blur(5px);
+    }
+    50%{
+        opacity:1;
+        transform:translateY(8px) rotateX(-15deg) scale(1.08);
+        filter:blur(0);
+    }
+    100%{
+        transform:translateY(0) rotateX(0) scale(1);
+    }
+}
+
+.label{
+    margin-top:8px;
+    color:#707b89;
+    font-size:9px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+}
+
+.live{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:8px;
+    margin:18px 0 35px;
+    color:#687383;
+    font-size:11px;
+}
+
+.dot{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:#51c58a;
+    box-shadow:0 0 12px #51c58a;
+    animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+    50%{opacity:.3;transform:scale(.7)}
+}
+
+/* UMUMIY HISOB */
+
+.total-section{
+    margin-top:35px;
+}
+
+.section-heading{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.section-heading h3{
+    font-size:22px;
+}
+
+.section-heading p{
+    color:var(--muted);
+    margin-top:6px;
+    font-size:12px;
+}
+
+.total-grid{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:11px;
+}
+
+.total-card{
+    padding:22px 10px;
+    text-align:center;
+    border:1px solid var(--line);
+    border-radius:17px;
+    background:linear-gradient(145deg,#121821,#0d1219);
+}
+
+.total-number{
+    font-size:25px;
+    font-weight:800;
+    color:var(--gold2);
+    min-height:34px;
+}
+
+.total-label{
+    color:#788392;
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    margin-top:7px;
+}
+
+.explanation{
+    margin-top:20px;
+    padding:18px;
+    border:1px solid rgba(216,173,89,.15);
+    background:rgba(216,173,89,.035);
+    border-radius:14px;
+    text-align:center;
+    color:#929baa;
+    font-size:12px;
+    line-height:1.7;
+}
+
+.explanation strong{
+    color:var(--gold2);
+}
+
+footer{
+    text-align:center;
+    color:#535d6a;
+    font-size:10px;
+    letter-spacing:2px;
+    margin-top:40px;
+}
+
+@media(max-width:900px){
+    .form{grid-template-columns:1fr 1fr}
+    .counters{grid-template-columns:repeat(4,1fr)}
+    .total-grid{grid-template-columns:repeat(3,1fr)}
+}
+
+@media(max-width:600px){
+    .wrapper{padding-top:18px}
+    .badge{display:none}
+    .hero{margin-bottom:25px}
+    .panel{padding:18px}
+    .form{grid-template-columns:1fr}
+    .note,button{grid-column:auto}
+    .counters{grid-template-columns:repeat(2,1fr)}
+    .total-grid{grid-template-columns:repeat(2,1fr)}
+    .counter{min-height:115px}
+    .number{font-size:29px}
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrapper">
+
+<header>
+
+    <div class="brand">
+
+        <div class="logo">
+            <span>DTH</span>
+        </div>
+
+        <div>
+            <h1>DTH</h1>
+            <p>DIGITAL TIME & HISTORY</p>
+        </div>
+
+    </div>
+
+    <div class="badge">
+        REAL TIME
+    </div>
+
+</header>
+
+
+<section class="hero">
+
+    <h2>
+        Hayotingizni <span>vaqt bilan o‘lchang.</span>
+    </h2>
+
+    <p>
+        Tug‘ilgan sanangizni kiriting va tug‘ilgan kundan
+        bugungi kungacha qancha vaqt o‘tganini aniq ko‘ring.
+    </p>
+
+</section>
+
+
+<section class="panel">
+
+    <div class="form">
+
+        <div>
+            <label>
+                Ism
+                <span class="optional">ixtiyoriy</span>
+            </label>
+
+            <input
+                id="name"
+                type="text"
+                placeholder="Ismingiz"
+            >
+        </div>
+
+
+        <div>
+            <label>Tug‘ilgan sana</label>
+
+            <input
+                id="date"
+                type="date"
+            >
+        </div>
+
+
+        <div>
+            <label>
+                Tug‘ilgan vaqt
+                <span class="optional">ixtiyoriy</span>
+            </label>
+
+            <input
+                id="time"
+                type="time"
+                step="1"
+                value="00:00:00"
+            >
+        </div>
+
+
+        <div class="note">
+            <b>ⓘ</b>
+            Tug‘ilgan soatingizni bilmasangiz, uni kiritish shart emas.
+            Hisoblash 00:00 dan boshlanadi.
+        </div>
+
+
+        <button onclick="start()">
+            HISOBLASHNI BOSHLASH
+        </button>
+
+    </div>
+
+</section>
+
+
+<div class="loading" id="loading">
+
+    <div class="loader"></div>
+
+    <p>Hayotingiz vaqti hisoblanmoqda...</p>
+
+</div>
+
+
+<section class="result" id="result">
+
+    <div class="result-title">
+
+        <h3 id="personTitle">
+            Sizning hayotingiz
+        </h3>
+
+        <p id="birthInfo"></p>
+
+    </div>
+
+
+    <!-- YOSH -->
+    <div class="counters">
+
+        <div class="counter">
+            <div class="number" id="years">0</div>
+            <div class="label">Yil</div>
+        </div>
+
+        <div class="counter">
+            <div class="number" id="months">0</div>
+            <div class="label">Oy</div>
+        </div>
+
+        <div class="counter">
+            <div class="number" id="weeks">0</div>
+            <div class="label">Hafta</div>
+        </div>
+
+        <div class="counter">
+            <div class="number" id="days">0</div>
+            <div class="label">Kun</div>
+        </div>
+
+        <div class="counter">
+            <div class="number" id="hours">0</div>
+            <div class="label">Soat</div>
+        </div>
+
+        <div class="counter">
+            <div class="number" id="minutes">0</div>
+            <div class="label">Daqiqa</div>
+        </div>
+
+        <div class="counter">
+            <div class="number" id="seconds">0</div>
+            <div class="label">Soniya</div>
+        </div>
+
+    </div>
+
+
+    <div class="live">
+        <span class="dot"></span>
+        REAL TIME — har soniyada yangilanmoqda
+    </div>
+
+
+    <!-- UMUMIY O'TGAN VAQT -->
+
+    <div class="total-section">
+
+        <div class="section-heading">
+
+            <h3>Tug‘ilgan kundan boshlab</h3>
+
+            <p>
+                Siz tug‘ilgan kundan bugungi kungacha qancha vaqt o‘tgan
+            </p>
+
+        </div>
+
+
+        <div class="total-grid">
+
+            <div class="total-card">
+                <div class="total-number" id="totalYears">0</div>
+                <div class="total-label">Yil</div>
+            </div>
+
+            <div class="total-card">
+                <div class="total-number" id="totalMonths">0</div>
+                <div class="total-label">Oy</div>
+            </div>
+
+            <div class="total-card">
+                <div class="total-number" id="totalWeeks">0</div>
+                <div class="total-label">Hafta</div>
+            </div>
+
+            <div class="total-card">
+                <div class="total-number" id="totalDays">0</div>
+                <div class="total-label">Kun</div>
+            </div>
+
+            <div class="total-card">
+                <div class="total-number" id="totalHours">0</div>
+                <div class="total-label">Soat</div>
+            </div>
+
+            <div class="total-card">
+                <div class="total-number" id="totalMinutes">0</div>
+                <div class="total-label">Daqiqa</div>
+            </div>
+
+            <div class="total-card">
+                <div class="total-number" id="totalSeconds">0</div>
+                <div class="total-label">Soniya</div>
+            </div>
+
+        </div>
+
+
+        <div class="explanation">
+            Siz tug‘ilgan kundan boshlab
+            <strong id="sentence"></strong>
+            vaqt yashab keldingiz.
+        </div>
+
+    </div>
+
+</section>
+
+
+<footer>
+    DTH • DIGITAL TIME & HISTORY • 2026
+</footer>
+
+</div>
+
+
+<script>
+
+let birthDate=null;
+let timer=null;
+
+const ageIds=[
+    "years","months","weeks","days",
+    "hours","minutes","seconds"
+];
+
+function start(){
+
+    const date=document.getElementById("date").value;
+    const time=document.getElementById("time").value || "00:00:00";
+    const name=document.getElementById("name").value.trim();
+
+    if(!date){
+        alert("Tug‘ilgan sanangizni kiriting.");
+        return;
+    }
+
+    birthDate=new Date(`${date}T${time}`);
+
+    if(birthDate>new Date()){
+        alert("Tug‘ilgan sana kelajakda bo‘lishi mumkin emas.");
+        return;
+    }
+
+    if(timer) clearInterval(timer);
+
+    document.getElementById("loading").style.display="block";
+    document.getElementById("result").classList.remove("show");
+
+    setTimeout(()=>{
+
+        document.getElementById("loading").style.display="none";
+        document.getElementById("result").classList.add("show");
+
+        document.getElementById("personTitle").textContent=
+            name ? `${name}, sizning hayotingiz` : "Sizning hayotingiz";
+
+        document.getElementById("birthInfo").textContent=
+            "Tug‘ilgan sana: "+formatDate(birthDate);
+
+        ageIds.forEach(id=>{
+            document.getElementById(id).textContent="0";
+        });
+
+        animateAge();
+
+        setTimeout(()=>{
+            update();
+            timer=setInterval(update,1000);
+        },3200);
+
+    },700);
+}
+
+
+/* BIRINCHI HISOBLASH — BITTA-BITTA */
+
+function animateAge(){
+
+    const age=getAge();
+
+    ageIds.forEach((id,index)=>{
+
+        setTimeout(()=>{
+
+            setNumber(
+                document.getElementById(id),
+                age[id]
+            );
+
+        },index*420);
+
+    });
+
+}
+
+
+/* YOSHNI HISOBLASH */
+
+function getAge(){
+
+    const now=new Date();
+
+    let years=
+        now.getFullYear()-
+        birthDate.getFullYear();
+
+    let anniversary=new Date(
+        now.getFullYear(),
+        birthDate.getMonth(),
+        birthDate.getDate(),
+        birthDate.getHours(),
+        birthDate.getMinutes(),
+        birthDate.getSeconds()
+    );
+
+    if(now<anniversary) years--;
+
+    let lastBirthday=new Date(
+        birthDate.getFullYear()+years,
+        birthDate.getMonth(),
+        birthDate.getDate(),
+        birthDate.getHours(),
+        birthDate.getMinutes(),
+        birthDate.getSeconds()
+    );
+
+    let temp=new Date(lastBirthday);
+    let months=0;
+
+    while(true){
+
+        let next=new Date(temp);
+
+        next.setMonth(next.getMonth()+1);
+
+        if(next<=now){
+
+            months++;
+            temp=next;
+
+        }else{
+            break;
+        }
+    }
+
+    const diff=now-temp;
+
+    const secondsTotal=Math.floor(diff/1000);
+
+    const days=Math.floor(secondsTotal/86400);
+
+    const weeks=Math.floor(days/7);
+
+    const hours=Math.floor(
+        (secondsTotal%86400)/3600
+    );
+
+    const minutes=Math.floor(
+        (secondsTotal%3600)/60
+    );
+
+    const seconds=secondsTotal%60;
+
+    return{
+        years,
+        months,
+        weeks,
+        days,
+        hours,
+        minutes,
+        seconds
+    };
+}
+
+
+/* UMUMIY O'TGAN VAQT */
+
+function updateTotal(){
+
+    const now=new Date();
+
+    const diff=now-birthDate;
+
+    const totalSeconds=Math.floor(diff/1000);
+
+    const totalMinutes=Math.floor(totalSeconds/60);
+
+    const totalHours=Math.floor(totalSeconds/3600);
+
+    const totalDays=Math.floor(totalSeconds/86400);
+
+    const totalWeeks=Math.floor(totalDays/7);
+
+    /*
+       Tug'ilgan kundan beri o'tgan
+       to'liq oylar.
+    */
+    let totalMonths=
+        (now.getFullYear()-birthDate.getFullYear())*12+
+        (now.getMonth()-birthDate.getMonth());
+
+    if(
+        now.getDate()<birthDate.getDate() ||
+        (
+            now.getDate()===birthDate.getDate() &&
+            (
+                now.getHours()<birthDate.getHours() ||
+                (
+                    now.getHours()===birthDate.getHours() &&
+                    now.getMinutes()<birthDate.getMinutes()
+                )
+            )
+        )
+    ){
+        totalMonths--;
+    }
+
+    const totalYears=Math.floor(totalMonths/12);
+
+
+    setTotal("totalYears",totalYears);
+    setTotal("totalMonths",totalMonths);
+    setTotal("totalWeeks",totalWeeks);
+    setTotal("totalDays",totalDays);
+    setTotal("totalHours",totalHours);
+    setTotal("totalMinutes",totalMinutes);
+    setTotal("totalSeconds",totalSeconds);
+
+
+    document.getElementById("sentence").textContent=
+        `${totalMonths.toLocaleString("uz-UZ")} oy, `+
+        `${totalWeeks.toLocaleString("uz-UZ")} hafta, `+
+        `${totalDays.toLocaleString("uz-UZ")} kun, `+
+        `${totalMinutes.toLocaleString("uz-UZ")} daqiqa va `+
+        `${totalSeconds.toLocaleString("uz-UZ")} soniya`;
+}
+
+
+function update(){
+
+    const age=getAge();
+
+    ageIds.forEach(id=>{
+
+        const element=document.getElementById(id);
+
+        if(element.textContent!==String(age[id])){
+            setNumber(element,age[id]);
+        }
+
+    });
+
+    updateTotal();
+}
+
+
+/* RAQAM ANIMATSIYASI */
+
+function setNumber(element,value){
+
+    element.classList.remove("animate");
+
+    void element.offsetWidth;
+
+    element.textContent=
+        Number(value).toLocaleString("uz-UZ");
+
+    element.classList.add("animate");
+}
+
+
+function setTotal(id,value){
+
+    const element=document.getElementById(id);
+
+    const formatted=
+        Number(value).toLocaleString("uz-UZ");
+
+    if(element.textContent!==formatted){
+
+        element.textContent=formatted;
+
+        element.classList.remove("animate");
+
+        void element.offsetWidth;
+
+        element.classList.add("animate");
+    }
+}
+
+
+function formatDate(date){
+
+    const months=[
+        "yanvar","fevral","mart","aprel",
+        "may","iyun","iyul","avgust",
+        "sentabr","oktabr","noyabr","dekabr"
+    ];
+
+    return `${date.getDate()}-${months[date.getMonth()]}-${date.getFullYear()} `+
+           `${String(date.getHours()).padStart(2,"0")}:`+
+           `${String(date.getMinutes()).padStart(2,"0")}:`+
+           `${String(date.getSeconds()).padStart(2,"0")}`;
+}
+
+</script>
+
+</body>
+</html>
