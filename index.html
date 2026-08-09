@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="description" content="DTH — Digital Time & History. Tug‘ilgan kundan hozirgacha o‘tgan vaqtni hisoblang.">
 <title>DTH — Digital Time & History</title>
 
 <style>
@@ -18,8 +17,6 @@
  --text:#f5f7fa;
  --muted:#8993a2;
 }
-
-html{scroll-behavior:smooth}
 
 body{
  min-height:100vh;
@@ -44,9 +41,7 @@ body:before{
  background-size:55px 55px;
 }
 
-/* =========================
-   INTRO
-========================= */
+/* ================= INTRO ================= */
 
 .intro{
  position:fixed;
@@ -84,29 +79,25 @@ body:before{
 }
 
 @keyframes gridMove{
- to{
-  transform:perspective(500px) rotateX(55deg) translateY(0);
- }
+ to{transform:perspective(500px) rotateX(55deg) translateY(0)}
 }
 
-.glow{
+.glow,.glow2{
  position:absolute;
  width:420px;
  height:420px;
  border-radius:50%;
- background:rgba(216,173,89,.06);
  filter:blur(80px);
+}
+
+.glow{
+ background:rgba(216,173,89,.06);
  left:-150px;
  top:-150px;
 }
 
 .glow2{
- position:absolute;
- width:400px;
- height:400px;
- border-radius:50%;
  background:rgba(50,80,120,.07);
- filter:blur(80px);
  right:-160px;
  bottom:-150px;
 }
@@ -116,15 +107,43 @@ body:before{
  z-index:2;
  width:min(650px,92%);
  text-align:center;
- padding:35px 0;
+ padding:30px 0;
 }
 
-/* LOGO */
+.lang-box{
+ position:absolute;
+ top:15px;
+ right:15px;
+ display:flex;
+ gap:4px;
+ padding:4px;
+ border:1px solid var(--line);
+ background:rgba(10,14,20,.8);
+ border-radius:12px;
+ backdrop-filter:blur(10px);
+}
+
+.lang-btn{
+ border:0;
+ background:transparent;
+ color:#687383;
+ padding:7px 9px;
+ border-radius:8px;
+ font-size:10px;
+ font-weight:800;
+ cursor:pointer;
+ transition:.25s;
+}
+
+.lang-btn.active{
+ background:rgba(216,173,89,.15);
+ color:var(--gold2);
+}
 
 .big-logo{
  width:105px;
  height:105px;
- margin:0 auto 25px;
+ margin:20px auto 25px;
  border:1px solid rgba(216,173,89,.65);
  border-radius:30px;
  background:linear-gradient(145deg,#171e28,#080c12);
@@ -133,7 +152,7 @@ body:before{
  justify-content:center;
  position:relative;
  box-shadow:0 0 60px rgba(216,173,89,.12);
- animation:logoIn 1s cubic-bezier(.2,.8,.2,1);
+ animation:logoIn 1s ease;
 }
 
 .big-logo:before{
@@ -143,16 +162,6 @@ body:before{
  border:1px solid rgba(216,173,89,.35);
  border-radius:22px;
  animation:spin 12s linear infinite;
-}
-
-.big-logo:after{
- content:"";
- position:absolute;
- width:125px;
- height:125px;
- border:1px solid rgba(216,173,89,.15);
- border-radius:50%;
- animation:ring 2.5s infinite;
 }
 
 .big-logo span{
@@ -165,65 +174,25 @@ body:before{
 }
 
 @keyframes logoIn{
- from{
-  opacity:0;
-  transform:scale(.5) rotate(-20deg);
-  filter:blur(10px);
- }
- to{
-  opacity:1;
-  transform:scale(1) rotate(0);
-  filter:none;
- }
+ from{opacity:0;transform:scale(.5) rotate(-20deg);filter:blur(10px)}
+ to{opacity:1;transform:none;filter:none}
 }
 
-@keyframes spin{
- to{transform:rotate(360deg)}
-}
-
-@keyframes ring{
- 0%{
-  transform:scale(.8);
-  opacity:.6;
- }
- 100%{
-  transform:scale(1.8);
-  opacity:0;
- }
-}
+@keyframes spin{to{transform:rotate(360deg)}}
 
 .intro h1{
  font-size:clamp(42px,8vw,68px);
  letter-spacing:9px;
- animation:up .8s .2s both;
 }
 
-.intro h1 span{
- color:var(--gold2);
-}
+.intro h1 span{color:var(--gold2)}
 
 .subtitle{
  color:var(--muted);
  font-size:11px;
  letter-spacing:4px;
  margin-top:7px;
- animation:up .8s .35s both;
 }
-
-@keyframes up{
- from{
-  opacity:0;
-  transform:translateY(20px);
-  filter:blur(6px);
- }
- to{
-  opacity:1;
-  transform:none;
-  filter:none;
- }
-}
-
-/* TUSHUNTIRISH */
 
 .story{
  margin:28px auto 0;
@@ -232,7 +201,6 @@ body:before{
  border:1px solid var(--line);
  border-radius:18px;
  background:rgba(255,255,255,.025);
- animation:up .8s .5s both;
 }
 
 .story-title{
@@ -248,8 +216,6 @@ body:before{
  line-height:1.8;
 }
 
-/* QADAMLAR */
-
 .steps{
  display:grid;
  grid-template-columns:repeat(3,1fr);
@@ -262,12 +228,7 @@ body:before{
  border-radius:15px;
  padding:16px 10px;
  background:rgba(255,255,255,.025);
- animation:up .7s both;
 }
-
-.step:nth-child(1){animation-delay:.65s}
-.step:nth-child(2){animation-delay:.8s}
-.step:nth-child(3){animation-delay:.95s}
 
 .step-number{
  color:var(--gold2);
@@ -276,18 +237,13 @@ body:before{
  margin-bottom:7px;
 }
 
-.step h3{
- font-size:12px;
- margin-bottom:5px;
-}
+.step h3{font-size:12px;margin-bottom:5px}
 
 .step p{
  color:#697484;
  font-size:9px;
  line-height:1.5;
 }
-
-/* MAXFIYLIK */
 
 .privacy{
  margin-top:16px;
@@ -296,13 +252,9 @@ body:before{
  border-radius:16px;
  padding:15px;
  text-align:left;
- animation:up .7s 1.05s both;
 }
 
 .privacy-title{
- display:flex;
- align-items:center;
- gap:8px;
  color:#c5a25d;
  font-size:11px;
  font-weight:700;
@@ -327,7 +279,6 @@ body:before{
 .check-row input{
  width:17px;
  height:17px;
- margin-top:1px;
  accent-color:var(--gold);
  cursor:pointer;
  flex:none;
@@ -339,16 +290,9 @@ body:before{
  line-height:1.55;
 }
 
-.check-row b{
- color:var(--gold2);
-}
+.check-row b{color:var(--gold2)}
 
-/* START */
-
-.start-area{
- margin-top:17px;
- animation:up .7s 1.2s both;
-}
+.start-area{margin-top:17px}
 
 .start-btn{
  width:100%;
@@ -359,7 +303,6 @@ body:before{
  background:linear-gradient(135deg,#9f722d,#f0cc73);
  color:#111;
  font-weight:900;
- letter-spacing:.7px;
  cursor:pointer;
  transition:.3s;
  opacity:.4;
@@ -382,9 +325,7 @@ body:before{
  margin-top:9px;
 }
 
-/* =========================
-   SOATLI LOADING
-========================= */
+/* ================= LOADING ================= */
 
 .loading{
  position:fixed;
@@ -394,29 +335,21 @@ body:before{
  display:none;
  align-items:center;
  justify-content:center;
- overflow:hidden;
 }
 
-.loading.show{
- display:flex;
-}
+.loading.show{display:flex}
 
-.loading-box{
- text-align:center;
- position:relative;
-}
+.loading-box{text-align:center}
 
 .clock{
  width:170px;
  height:170px;
- margin:auto;
  border:1px solid rgba(216,173,89,.3);
  border-radius:50%;
  position:relative;
  box-shadow:
  0 0 0 10px rgba(216,173,89,.025),
  0 0 70px rgba(216,173,89,.1);
- animation:clockIn .8s ease both;
 }
 
 .clock:before{
@@ -434,17 +367,6 @@ body:before{
  border:1px dashed rgba(216,173,89,.18);
  border-radius:50%;
  animation:spin 12s linear infinite;
-}
-
-@keyframes clockIn{
- from{
-  transform:scale(.5);
-  opacity:0;
- }
- to{
-  transform:scale(1);
-  opacity:1;
- }
 }
 
 .tick{
@@ -490,7 +412,7 @@ body:before{
  width:2px;
  height:57px;
  background:#fff;
- transform:translateX(-50%) rotate(0deg);
+ transform:translateX(-50%);
  animation:minuteSpin 1.5s linear infinite;
 }
 
@@ -498,26 +420,20 @@ body:before{
  width:1px;
  height:65px;
  background:var(--gold);
- transform:translateX(-50%) rotate(0deg);
+ transform:translateX(-50%);
  animation:secondSpin .7s linear infinite;
 }
 
 @keyframes hourSpin{
- to{
-  transform:translateX(-50%) rotate(395deg);
- }
+ to{transform:translateX(-50%) rotate(395deg)}
 }
 
 @keyframes minuteSpin{
- to{
-  transform:translateX(-50%) rotate(360deg);
- }
+ to{transform:translateX(-50%) rotate(360deg)}
 }
 
 @keyframes secondSpin{
- to{
-  transform:translateX(-50%) rotate(360deg);
- }
+ to{transform:translateX(-50%) rotate(360deg)}
 }
 
 .center{
@@ -554,7 +470,6 @@ body:before{
  background:#202631;
  margin:17px auto 0;
  overflow:hidden;
- border-radius:5px;
 }
 
 .progress i{
@@ -565,13 +480,9 @@ body:before{
  animation:progress 2.2s ease forwards;
 }
 
-@keyframes progress{
- to{width:100%}
-}
+@keyframes progress{to{width:100%}}
 
-/* =========================
-   ASOSIY SAYT
-========================= */
+/* ================= MAIN ================= */
 
 .site{
  opacity:0;
@@ -618,7 +529,6 @@ header{
  color:var(--gold2);
  font-weight:900;
  font-size:14px;
- letter-spacing:1px;
 }
 
 .brand h1{
@@ -633,6 +543,12 @@ header{
  letter-spacing:2px;
 }
 
+.header-right{
+ display:flex;
+ align-items:center;
+ gap:10px;
+}
+
 .badge{
  border:1px solid var(--line);
  border-radius:30px;
@@ -641,7 +557,29 @@ header{
  font-size:11px;
 }
 
-/* HERO */
+.main-lang{
+ display:flex;
+ gap:3px;
+ padding:4px;
+ border:1px solid var(--line);
+ border-radius:12px;
+}
+
+.main-lang button{
+ border:0;
+ background:transparent;
+ color:#697484;
+ padding:6px 8px;
+ border-radius:7px;
+ font-size:9px;
+ font-weight:800;
+ cursor:pointer;
+}
+
+.main-lang button.active{
+ color:var(--gold2);
+ background:rgba(216,173,89,.13);
+}
 
 .hero{
  text-align:center;
@@ -652,9 +590,7 @@ header{
  font-size:clamp(30px,5vw,50px);
 }
 
-.hero h2 span{
- color:var(--gold2);
-}
+.hero h2 span{color:var(--gold2)}
 
 .hero p{
  max-width:650px;
@@ -663,8 +599,6 @@ header{
  line-height:1.7;
  font-size:14px;
 }
-
-/* FORM */
 
 .panel{
  background:linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.015));
@@ -688,9 +622,7 @@ label{
  font-size:12px;
 }
 
-.optional{
- color:#687383;
-}
+.optional{color:#687383}
 
 .form input{
  width:100%;
@@ -714,9 +646,7 @@ label{
  font-size:12px;
 }
 
-.note b{
- color:var(--gold2);
-}
+.note b{color:var(--gold2)}
 
 .calculate{
  grid-column:1/-1;
@@ -729,25 +659,19 @@ label{
  background:linear-gradient(135deg,#b98939,#e5bf68);
 }
 
-/* NATIJA */
-
 .result{
  display:none;
  margin-top:30px;
 }
 
-.result.show{
- display:block;
-}
+.result.show{display:block}
 
 .result-title{
  text-align:center;
  margin-bottom:25px;
 }
 
-.result-title h3{
- font-size:24px;
-}
+.result-title h3{font-size:24px}
 
 .result-title p{
  color:var(--muted);
@@ -782,19 +706,9 @@ label{
 }
 
 @keyframes flip{
- 0%{
-  opacity:0;
-  transform:translateY(-30px) rotateX(80deg) scale(.7);
-  filter:blur(5px);
- }
- 50%{
-  opacity:1;
-  transform:translateY(6px) rotateX(-10deg) scale(1.07);
-  filter:blur(0);
- }
- 100%{
-  transform:none;
- }
+ 0%{opacity:0;transform:translateY(-30px) rotateX(80deg) scale(.7);filter:blur(5px)}
+ 50%{opacity:1;transform:translateY(6px) rotateX(-10deg) scale(1.07);filter:blur(0)}
+ 100%{transform:none}
 }
 
 .counter .label{
@@ -825,16 +739,7 @@ label{
 }
 
 @keyframes pulse{
- 50%{
-  opacity:.3;
-  transform:scale(.7);
- }
-}
-
-/* UMUMIY */
-
-.total-section{
- margin-top:35px;
+ 50%{opacity:.3;transform:scale(.7)}
 }
 
 .section-heading{
@@ -842,9 +747,7 @@ label{
  margin-bottom:20px;
 }
 
-.section-heading h3{
- font-size:22px;
-}
+.section-heading h3{font-size:22px}
 
 .section-heading p{
  color:var(--muted);
@@ -892,11 +795,7 @@ label{
  line-height:1.7;
 }
 
-.explanation strong{
- color:var(--gold2);
-}
-
-/* FOOTER */
+.explanation strong{color:var(--gold2)}
 
 footer{
  text-align:center;
@@ -919,16 +818,12 @@ footer{
  text-decoration:none;
  font-size:11px;
  font-weight:700;
- letter-spacing:.5px;
  transition:.3s;
- background:rgba(216,173,89,.025);
 }
 
 .instagram:hover{
- color:#fff;
  border-color:var(--gold);
  transform:translateY(-2px);
- box-shadow:0 10px 25px rgba(216,173,89,.1);
 }
 
 .instagram-icon{
@@ -961,81 +856,31 @@ footer{
  right:4px;
 }
 
-/* MOBILE */
-
 @media(max-width:900px){
-
- .form{
-  grid-template-columns:1fr 1fr;
- }
-
- .counters{
-  grid-template-columns:repeat(4,1fr);
- }
-
- .total-grid{
-  grid-template-columns:repeat(3,1fr);
- }
-
+ .form{grid-template-columns:1fr 1fr}
+ .counters{grid-template-columns:repeat(4,1fr)}
+ .total-grid{grid-template-columns:repeat(3,1fr)}
 }
 
 @media(max-width:600px){
-
- .wrapper{
-  padding-top:18px;
- }
-
- .badge{
-  display:none;
- }
-
- .panel{
-  padding:18px;
- }
-
- .form{
-  grid-template-columns:1fr;
- }
-
- .note,
- .calculate{
-  grid-column:auto;
- }
-
- .counters{
-  grid-template-columns:repeat(2,1fr);
- }
-
- .total-grid{
-  grid-template-columns:repeat(2,1fr);
- }
-
- .steps{
-  grid-template-columns:1fr;
- }
-
- .story{
-  padding:18px;
- }
-
- .intro-content{
-  padding:25px 0;
- }
-
- .big-logo{
-  width:90px;
-  height:90px;
- }
-
+ .wrapper{padding-top:18px}
+ .badge{display:none}
+ .header-right{gap:5px}
+ .panel{padding:18px}
+ .form{grid-template-columns:1fr}
+ .note,.calculate{grid-column:auto}
+ .counters{grid-template-columns:repeat(2,1fr)}
+ .total-grid{grid-template-columns:repeat(2,1fr)}
+ .steps{grid-template-columns:1fr}
+ .story{padding:18px}
+ .big-logo{width:90px;height:90px}
 }
 </style>
 </head>
 
 <body>
 
-<!-- =====================================================
-     KIRISH / QO'LLANMA
-===================================================== -->
+<!-- ================= INTRO ================= -->
 
 <div class="intro" id="intro">
 
@@ -1047,6 +892,13 @@ footer{
 
  <div class="intro-content">
 
+  <!-- TIL TANLASH -->
+  <div class="lang-box">
+   <button class="lang-btn active" data-lang="uz" onclick="changeLanguage('uz')">UZ</button>
+   <button class="lang-btn" data-lang="ru" onclick="changeLanguage('ru')">RU</button>
+   <button class="lang-btn" data-lang="en" onclick="changeLanguage('en')">EN</button>
+  </div>
+
   <div class="big-logo">
    <span>DTH</span>
   </div>
@@ -1057,113 +909,95 @@ footer{
    DIGITAL TIME & HISTORY
   </div>
 
-
   <div class="story">
 
-   <div class="story-title">
+   <div class="story-title" data-i18n="storyTitle">
     Vaqtingizning raqamli tarixi
    </div>
 
-   <p>
+   <p data-i18n="storyText">
     DTH — tug‘ilgan kuningizdan boshlab hozirgi vaqtgacha
     hayotingiz davomida qancha yil, oy, hafta, kun, soat,
     daqiqa va soniya o‘tganini ko‘rsatadigan zamonaviy
-    vaqt hisoblagich. Tug‘ilgan sanangizni kiriting va
-    vaqtni boshqacha nigoh bilan ko‘ring.
+    vaqt hisoblagich.
    </p>
 
   </div>
-
 
   <div class="steps">
 
    <div class="step">
     <div class="step-number">01</div>
-    <h3>Sanangizni kiriting</h3>
-    <p>
+    <h3 data-i18n="step1Title">Sanangizni kiriting</h3>
+    <p data-i18n="step1Text">
      Tug‘ilgan kuningizni belgilang.
-     Vaqtni bilsangiz, uni ham kiriting.
     </p>
    </div>
 
    <div class="step">
     <div class="step-number">02</div>
-    <h3>Hisoblashni boshlang</h3>
-    <p>
-     DTH tug‘ilgan vaqtingizdan hozirgacha
-     o‘tgan vaqtni hisoblaydi.
+    <h3 data-i18n="step2Title">Hisoblashni boshlang</h3>
+    <p data-i18n="step2Text">
+     DTH o‘tgan vaqtni hisoblaydi.
     </p>
    </div>
 
    <div class="step">
     <div class="step-number">03</div>
-    <h3>Vaqtingizni kuzating</h3>
-    <p>
-     Natijalar real vaqt rejimida
-     har soniyada yangilanadi.
+    <h3 data-i18n="step3Title">Vaqtingizni kuzating</h3>
+    <p data-i18n="step3Text">
+     Natijalar real vaqtda yangilanadi.
     </p>
    </div>
 
   </div>
 
-
-  <!-- MAXFIYLIK -->
-
   <div class="privacy">
 
-   <div class="privacy-title">
+   <div class="privacy-title" data-i18n="privacyTitle">
     🔒 Maxfiylik haqida kichik eslatma
    </div>
 
-   <p>
-    Ushbu DTH kodi kiritgan ma’lumotlaringizni o‘z serveriga
-    yubormaydi va ma’lumotlarni saqlash funksiyasiga ega emas.
-    Ma’lumotlar hisoblash uchun brauzeringizda ishlatiladi.
+   <p data-i18n="privacyText">
+    Ushbu DTH kodi kiritgan ma’lumotlaringizni serverga
+    yubormaydi va ma’lumotlarni saqlamaydi.
    </p>
 
    <label class="check-row">
 
-    <input
-     type="checkbox"
-     id="privacyCheck"
-     onchange="privacyChanged()"
-    >
+    <input type="checkbox" id="privacyCheck"
+           onchange="privacyChanged()">
 
-    <span>
+    <span data-i18n="privacyAgree">
      Men <b>maxfiylik shartlariga roziman</b> va
-     DTH saytiga kirishimni tasdiqlayman. Agar ushbu
-     shartlarga rozi bo‘lmasangiz, saytni boshlamang.
+     DTH saytiga kirishimni tasdiqlayman.
+     Agar rozi bo‘lmasangiz, saytni boshlamang.
     </span>
 
    </label>
 
   </div>
 
-
   <div class="start-area">
 
-   <button
-    class="start-btn"
-    id="startBtn"
-    onclick="enterSite()"
-   >
-    BOSHLASH&nbsp;&nbsp; →
+   <button class="start-btn"
+           id="startBtn"
+           onclick="enterSite()"
+           data-i18n="start">
+    BOSHLASH →
    </button>
 
-   <div class="start-note">
+   <div class="start-note" data-i18n="startNote">
     Davom etish uchun rozilik katagiga belgi qo‘ying.
    </div>
 
   </div>
 
  </div>
-
 </div>
 
 
-<!-- =====================================================
-     SOATLI LOADING
-===================================================== -->
+<!-- ================= LOADING ================= -->
 
 <div class="loading" id="loading">
 
@@ -1187,26 +1021,19 @@ footer{
 
   </div>
 
-  <div class="loading-logo">
-   DTH
-  </div>
+  <div class="loading-logo">DTH</div>
 
-  <div class="loading-text">
+  <div class="loading-text" data-i18n="loading">
    VAQT TARIXI YUKLANMOQDA...
   </div>
 
-  <div class="progress">
-   <i></i>
-  </div>
+  <div class="progress"><i></i></div>
 
  </div>
-
 </div>
 
 
-<!-- =====================================================
-     ASOSIY SAYT
-===================================================== -->
+<!-- ================= MAIN SITE ================= -->
 
 <main class="site" id="site">
 
@@ -1227,8 +1054,21 @@ footer{
 
  </div>
 
- <div class="badge">
-  REAL TIME
+ <div class="header-right">
+
+  <div class="main-lang">
+   <button data-lang="uz" class="active"
+           onclick="changeLanguage('uz')">UZ</button>
+   <button data-lang="ru"
+           onclick="changeLanguage('ru')">RU</button>
+   <button data-lang="en"
+           onclick="changeLanguage('en')">EN</button>
+  </div>
+
+  <div class="badge" data-i18n="realTime">
+   REAL TIME
+  </div>
+
  </div>
 
 </header>
@@ -1237,10 +1077,11 @@ footer{
 <section class="hero">
 
  <h2>
-  Hayotingizni <span>vaqt bilan o‘lchang.</span>
+  <span data-i18n="hero1">Hayotingizni</span>
+  <span data-i18n="hero2">vaqt bilan o‘lchang.</span>
  </h2>
 
- <p>
+ <p data-i18n="heroText">
   Tug‘ilgan sanangizni kiriting va tug‘ilgan kundan
   bugungi kungacha qancha vaqt o‘tganini aniq ko‘ring.
  </p>
@@ -1254,57 +1095,49 @@ footer{
 
   <div>
    <label>
-    Ism
-    <span class="optional">ixtiyoriy</span>
+    <span data-i18n="name">Ism</span>
+    <span class="optional" data-i18n="optional">ixtiyoriy</span>
    </label>
 
-   <input
-    id="name"
-    type="text"
-    placeholder="Ismingiz"
-    autocomplete="off"
-   >
+   <input id="name"
+          type="text"
+          autocomplete="off"
+          data-placeholder="namePlaceholder"
+          placeholder="Ismingiz">
+  </div>
+
+
+  <div>
+   <label data-i18n="birthDate">Tug‘ilgan sana</label>
+
+   <input id="date" type="date">
   </div>
 
 
   <div>
    <label>
-    Tug‘ilgan sana
+    <span data-i18n="birthTime">Tug‘ilgan vaqt</span>
+    <span class="optional" data-i18n="optional">ixtiyoriy</span>
    </label>
 
-   <input
-    id="date"
-    type="date"
-   >
-  </div>
-
-
-  <div>
-   <label>
-    Tug‘ilgan vaqt
-    <span class="optional">ixtiyoriy</span>
-   </label>
-
-   <input
-    id="time"
-    type="time"
-    step="1"
-    value="00:00:00"
-   >
+   <input id="time"
+          type="time"
+          step="1"
+          value="00:00:00">
   </div>
 
 
   <div class="note">
    <b>ⓘ</b>
-   Tug‘ilgan soatingizni bilmasangiz, kiritish shart emas.
-   Hisoblash 00:00:00 dan boshlanadi.
+   <span data-i18n="timeNote">
+    Tug‘ilgan soatingizni bilmasangiz, kiritish shart emas.
+   </span>
   </div>
 
 
-  <button
-   class="calculate"
-   onclick="startCalculation()"
-  >
+  <button class="calculate"
+          onclick="startCalculation()"
+          data-i18n="calculate">
    HISOBLASHNI BOSHLASH
   </button>
 
@@ -1317,7 +1150,8 @@ footer{
 
  <div class="result-title">
 
-  <h3 id="personTitle">
+  <h3 id="personTitle"
+      data-i18n="yourLife">
    Sizning hayotingiz
   </h3>
 
@@ -1330,37 +1164,37 @@ footer{
 
   <div class="counter">
    <div class="number" id="years">0</div>
-   <div class="label">Yil</div>
+   <div class="label" data-i18n="year">Yil</div>
   </div>
 
   <div class="counter">
    <div class="number" id="months">0</div>
-   <div class="label">Oy</div>
+   <div class="label" data-i18n="month">Oy</div>
   </div>
 
   <div class="counter">
    <div class="number" id="weeks">0</div>
-   <div class="label">Hafta</div>
+   <div class="label" data-i18n="week">Hafta</div>
   </div>
 
   <div class="counter">
    <div class="number" id="days">0</div>
-   <div class="label">Kun</div>
+   <div class="label" data-i18n="day">Kun</div>
   </div>
 
   <div class="counter">
    <div class="number" id="hours">0</div>
-   <div class="label">Soat</div>
+   <div class="label" data-i18n="hour">Soat</div>
   </div>
 
   <div class="counter">
    <div class="number" id="minutes">0</div>
-   <div class="label">Daqiqa</div>
+   <div class="label" data-i18n="minute">Daqiqa</div>
   </div>
 
   <div class="counter">
    <div class="number" id="seconds">0</div>
-   <div class="label">Soniya</div>
+   <div class="label" data-i18n="second">Soniya</div>
   </div>
 
  </div>
@@ -1368,77 +1202,79 @@ footer{
 
  <div class="live">
   <span class="dot"></span>
-  REAL TIME — har soniyada yangilanmoqda
+  <span data-i18n="live">REAL TIME — har soniyada yangilanmoqda</span>
  </div>
 
 
- <div class="total-section">
+ <div class="section-heading">
 
-  <div class="section-heading">
+  <h3 data-i18n="fromBirth">
+   Tug‘ilgan kundan boshlab
+  </h3>
 
-   <h3>Tug‘ilgan kundan boshlab</h3>
+  <p data-i18n="fromBirthText">
+   Siz tug‘ilgan kundan hozirgi vaqtgacha o‘tgan umumiy vaqt
+  </p>
 
-   <p>
-    Siz tug‘ilgan kundan hozirgi vaqtgacha o‘tgan umumiy vaqt
-   </p>
+ </div>
 
+
+ <div class="total-grid">
+
+  <div class="total-card">
+   <div class="total-number" id="totalYears">0</div>
+   <div class="total-label" data-i18n="year">Yil</div>
   </div>
 
-
-  <div class="total-grid">
-
-   <div class="total-card">
-    <div class="total-number" id="totalYears">0</div>
-    <div class="total-label">Yil</div>
-   </div>
-
-   <div class="total-card">
-    <div class="total-number" id="totalMonths">0</div>
-    <div class="total-label">Oy</div>
-   </div>
-
-   <div class="total-card">
-    <div class="total-number" id="totalWeeks">0</div>
-    <div class="total-label">Hafta</div>
-   </div>
-
-   <div class="total-card">
-    <div class="total-number" id="totalDays">0</div>
-    <div class="total-label">Kun</div>
-   </div>
-
-   <div class="total-card">
-    <div class="total-number" id="totalHours">0</div>
-    <div class="total-label">Soat</div>
-   </div>
-
-   <div class="total-card">
-    <div class="total-number" id="totalMinutes">0</div>
-    <div class="total-label">Daqiqa</div>
-   </div>
-
-   <div class="total-card">
-    <div class="total-number" id="totalSeconds">0</div>
-    <div class="total-label">Soniya</div>
-   </div>
-
+  <div class="total-card">
+   <div class="total-number" id="totalMonths">0</div>
+   <div class="total-label" data-i18n="month">Oy</div>
   </div>
 
+  <div class="total-card">
+   <div class="total-number" id="totalWeeks">0</div>
+   <div class="total-label" data-i18n="week">Hafta</div>
+  </div>
 
-  <div class="explanation">
+  <div class="total-card">
+   <div class="total-number" id="totalDays">0</div>
+   <div class="total-label" data-i18n="day">Kun</div>
+  </div>
 
+  <div class="total-card">
+   <div class="total-number" id="totalHours">0</div>
+   <div class="total-label" data-i18n="hour">Soat</div>
+  </div>
+
+  <div class="total-card">
+   <div class="total-number" id="totalMinutes">0</div>
+   <div class="total-label" data-i18n="minute">Daqiqa</div>
+  </div>
+
+  <div class="total-card">
+   <div class="total-number" id="totalSeconds">0</div>
+   <div class="total-label" data-i18n="second">Soniya</div>
+  </div>
+
+ </div>
+
+
+ <div class="explanation">
+
+  <span data-i18n="youHaveLived">
    Siz tug‘ilgan kundan boshlab
-   <strong id="sentence"></strong>
-   vaqt yashab keldingiz.
+  </span>
 
-  </div>
+  <strong id="sentence"></strong>
+
+  <span data-i18n="lived">
+   vaqt yashab keldingiz.
+  </span>
 
  </div>
 
 </section>
 
-
-<!-- FOOTER + INSTAGRAM -->
 
 <footer>
 
@@ -1446,16 +1282,12 @@ footer{
 
  <br>
 
- <a
-  class="instagram"
-  href="https://instagram.com/dth.site"
-  target="_blank"
-  rel="noopener noreferrer"
-  aria-label="DTH Instagram"
- >
+ <a class="instagram"
+    href="https://instagram.com/dth.site"
+    target="_blank"
+    rel="noopener noreferrer">
 
   <span class="instagram-icon"></span>
-
   @dth.site
 
  </a>
@@ -1463,41 +1295,226 @@ footer{
 </footer>
 
 </div>
-
 </main>
 
 
 <script>
 
-/* =========================
-   MAXFIYLIK
-========================= */
+/* =====================================================
+   TILLAR
+===================================================== */
 
-function privacyChanged(){
+const translations={
 
- const check=document.getElementById("privacyCheck");
- const button=document.getElementById("startBtn");
+ uz:{
+  storyTitle:"Vaqtingizning raqamli tarixi",
+  storyText:"DTH — tug‘ilgan kuningizdan boshlab hozirgi vaqtgacha hayotingiz davomida qancha yil, oy, hafta, kun, soat, daqiqa va soniya o‘tganini ko‘rsatadigan zamonaviy vaqt hisoblagich.",
+  step1Title:"Sanangizni kiriting",
+  step1Text:"Tug‘ilgan kuningizni belgilang. Vaqtni bilsangiz, uni ham kiriting.",
+  step2Title:"Hisoblashni boshlang",
+  step2Text:"DTH tug‘ilgan vaqtingizdan hozirgacha o‘tgan vaqtni hisoblaydi.",
+  step3Title:"Vaqtingizni kuzating",
+  step3Text:"Natijalar real vaqt rejimida har soniyada yangilanadi.",
+  privacyTitle:"🔒 Maxfiylik haqida kichik eslatma",
+  privacyText:"Ushbu DTH kodi kiritgan ma’lumotlaringizni serverga yubormaydi va ma’lumotlarni saqlamaydi. Ma’lumotlar faqat brauzeringizda hisoblash uchun ishlatiladi.",
+  privacyAgree:"Men maxfiylik shartlariga roziman va DTH saytiga kirishimni tasdiqlayman. Agar ushbu shartlarga rozi bo‘lmasangiz, saytni boshlamang.",
+  start:"BOSHLASH →",
+  startNote:"Davom etish uchun rozilik katagiga belgi qo‘ying.",
+  loading:"VAQT TARIXI YUKLANMOQDA...",
+  realTime:"REAL TIME",
+  hero1:"Hayotingizni",
+  hero2:"vaqt bilan o‘lchang.",
+  heroText:"Tug‘ilgan sanangizni kiriting va tug‘ilgan kundan bugungi kungacha qancha vaqt o‘tganini aniq ko‘ring.",
+  name:"Ism",
+  optional:"ixtiyoriy",
+  namePlaceholder:"Ismingiz",
+  birthDate:"Tug‘ilgan sana",
+  birthTime:"Tug‘ilgan vaqt",
+  timeNote:"Tug‘ilgan soatingizni bilmasangiz, kiritish shart emas. Hisoblash 00:00:00 dan boshlanadi.",
+  calculate:"HISOBLASHNI BOSHLASH",
+  yourLife:"Sizning hayotingiz",
+  year:"Yil",
+  month:"Oy",
+  week:"Hafta",
+  day:"Kun",
+  hour:"Soat",
+  minute:"Daqiqa",
+  second:"Soniya",
+  live:"REAL TIME — har soniyada yangilanmoqda",
+  fromBirth:"Tug‘ilgan kundan boshlab",
+  fromBirthText:"Siz tug‘ilgan kundan hozirgi vaqtgacha o‘tgan umumiy vaqt",
+  youHaveLived:"Siz tug‘ilgan kundan boshlab",
+  lived:"vaqt yashab keldingiz.",
+  enterDate:"Iltimos, tug‘ilgan sanangizni kiriting.",
+  futureDate:"Tug‘ilgan sana kelajakda bo‘lishi mumkin emas.",
+  invalidDate:"Kiritilgan sana yoki vaqt noto‘g‘ri.",
+  birthInfo:"Tug‘ilgan sana:"
+ },
 
- if(check.checked){
-  button.classList.add("enabled");
- }else{
-  button.classList.remove("enabled");
+ ru:{
+  storyTitle:"Цифровая история вашего времени",
+  storyText:"DTH — современный счётчик времени, который показывает, сколько лет, месяцев, недель, дней, часов, минут и секунд прошло с вашего рождения до настоящего момента.",
+  step1Title:"Введите дату",
+  step1Text:"Укажите дату рождения. Если знаете время — укажите и его.",
+  step2Title:"Начните расчёт",
+  step2Text:"DTH рассчитает время, прошедшее с момента вашего рождения.",
+  step3Title:"Следите за временем",
+  step3Text:"Результат обновляется в реальном времени каждую секунду.",
+  privacyTitle:"🔒 Небольшое уведомление о конфиденциальности",
+  privacyText:"Этот код DTH не отправляет введённые данные на сервер и не сохраняет их. Данные используются только в браузере для расчёта.",
+  privacyAgree:"Я согласен с условиями конфиденциальности и подтверждаю вход на сайт DTH. Если вы не согласны, не начинайте работу с сайтом.",
+  start:"НАЧАТЬ →",
+  startNote:"Для продолжения поставьте галочку согласия.",
+  loading:"ЗАГРУЖАЕТСЯ ИСТОРИЯ ВРЕМЕНИ...",
+  realTime:"РЕАЛЬНОЕ ВРЕМЯ",
+  hero1:"Измерьте свою жизнь",
+  hero2:"временем.",
+  heroText:"Введите дату рождения и узнайте, сколько времени прошло с вашего рождения до сегодняшнего момента.",
+  name:"Имя",
+  optional:"необязательно",
+  namePlaceholder:"Ваше имя",
+  birthDate:"Дата рождения",
+  birthTime:"Время рождения",
+  timeNote:"Если вы не знаете время рождения, вводить его необязательно. Расчёт начнётся с 00:00:00.",
+  calculate:"НАЧАТЬ РАСЧЁТ",
+  yourLife:"Ваша жизнь",
+  year:"Лет",
+  month:"Месяцев",
+  week:"Недель",
+  day:"Дней",
+  hour:"Часов",
+  minute:"Минут",
+  second:"Секунд",
+  live:"РЕАЛЬНОЕ ВРЕМЯ — обновляется каждую секунду",
+  fromBirth:"С момента рождения",
+  fromBirthText:"Общее время, прошедшее с момента вашего рождения",
+  youHaveLived:"С момента вашего рождения прошло",
+  lived:"времени.",
+  enterDate:"Пожалуйста, введите дату рождения.",
+  futureDate:"Дата рождения не может быть в будущем.",
+  invalidDate:"Указана неверная дата или время.",
+  birthInfo:"Дата рождения:"
+ },
+
+ en:{
+  storyTitle:"Your digital history of time",
+  storyText:"DTH is a modern time counter that shows how many years, months, weeks, days, hours, minutes and seconds have passed from your birth until now.",
+  step1Title:"Enter your date",
+  step1Text:"Choose your birth date. If you know the time, enter it too.",
+  step2Title:"Start the calculation",
+  step2Text:"DTH calculates the time that has passed since your birth.",
+  step3Title:"Watch your time",
+  step3Text:"The result updates every second in real time.",
+  privacyTitle:"🔒 Small privacy notice",
+  privacyText:"This DTH code does not send your entered information to a server and does not store it. Your data is used only in the browser for calculation.",
+  privacyAgree:"I agree to the privacy terms and confirm that I want to enter the DTH website. If you do not agree, please do not start the website.",
+  start:"START →",
+  startNote:"Check the consent box to continue.",
+  loading:"LOADING YOUR TIME HISTORY...",
+  realTime:"REAL TIME",
+  hero1:"Measure your life",
+  hero2:"through time.",
+  heroText:"Enter your birth date and see exactly how much time has passed from your birth until today.",
+  name:"Name",
+  optional:"optional",
+  namePlaceholder:"Your name",
+  birthDate:"Birth date",
+  birthTime:"Birth time",
+  timeNote:"If you do not know your birth time, you can leave it empty. The calculation will start at 00:00:00.",
+  calculate:"START CALCULATION",
+  yourLife:"Your life",
+  year:"Years",
+  month:"Months",
+  week:"Weeks",
+  day:"Days",
+  hour:"Hours",
+  minute:"Minutes",
+  second:"Seconds",
+  live:"REAL TIME — updates every second",
+  fromBirth:"Since your birth",
+  fromBirthText:"Total time that has passed since your birth",
+  youHaveLived:"Since your birth, you have lived",
+  lived:"of time.",
+  enterDate:"Please enter your birth date.",
+  futureDate:"Your birth date cannot be in the future.",
+  invalidDate:"The entered date or time is invalid.",
+  birthInfo:"Birth date:"
+ }
+
+};
+
+let currentLang="uz";
+
+
+function changeLanguage(lang){
+
+ currentLang=lang;
+
+ document.documentElement.lang=lang;
+
+ document.querySelectorAll("[data-i18n]").forEach(el=>{
+
+  const key=el.dataset.i18n;
+
+  if(translations[lang][key]){
+   el.innerHTML=translations[lang][key];
+  }
+
+ });
+
+ document.querySelectorAll("[data-placeholder]").forEach(el=>{
+
+  const key=el.dataset.placeholder;
+
+  if(translations[lang][key]){
+   el.placeholder=translations[lang][key];
+  }
+
+ });
+
+
+ document.querySelectorAll("[data-lang]").forEach(btn=>{
+
+  btn.classList.toggle(
+   "active",
+   btn.dataset.lang===lang
+  );
+
+ });
+
+
+ if(birthDate){
+  document.getElementById("birthInfo").textContent=
+   translations[lang].birthInfo+" "+
+   formatDate(birthDate);
  }
 
 }
 
 
-/* =========================
-   INTRO → LOADING → SITE
-========================= */
+/* =====================================================
+   PRIVACY
+===================================================== */
+
+function privacyChanged(){
+
+ const checked=
+  document.getElementById("privacyCheck").checked;
+
+ document.getElementById("startBtn")
+  .classList.toggle("enabled",checked);
+
+}
+
+
+/* =====================================================
+   ENTER
+===================================================== */
 
 function enterSite(){
 
- const check=document.getElementById("privacyCheck");
-
- if(!check.checked){
+ if(!document.getElementById("privacyCheck").checked)
   return;
- }
 
  const intro=document.getElementById("intro");
  const loading=document.getElementById("loading");
@@ -1512,13 +1529,7 @@ function enterSite(){
   setTimeout(()=>{
 
    loading.classList.remove("show");
-
    site.classList.add("ready");
-
-   window.scrollTo({
-    top:0,
-    behavior:"smooth"
-   });
 
   },2400);
 
@@ -1527,21 +1538,16 @@ function enterSite(){
 }
 
 
-/* =========================
+/* =====================================================
    CALCULATOR
-========================= */
+===================================================== */
 
 let birthDate=null;
 let timer=null;
 
 const ids=[
- "years",
- "months",
- "weeks",
- "days",
- "hours",
- "minutes",
- "seconds"
+ "years","months","weeks","days",
+ "hours","minutes","seconds"
 ];
 
 
@@ -1558,9 +1564,7 @@ function startCalculation(){
 
 
  if(!date){
-
-  alert("Iltimos, tug‘ilgan sanangizni kiriting.");
-
+  alert(translations[currentLang].enterDate);
   return;
  }
 
@@ -1569,36 +1573,29 @@ function startCalculation(){
 
 
  if(isNaN(birthDate.getTime())){
-
-  alert("Kiritilgan sana yoki vaqt noto‘g‘ri.");
-
+  alert(translations[currentLang].invalidDate);
   return;
  }
 
 
  if(birthDate>new Date()){
-
-  alert(
-   "Tug‘ilgan sana kelajakda bo‘lishi mumkin emas."
-  );
-
+  alert(translations[currentLang].futureDate);
   return;
  }
 
 
- if(timer){
-  clearInterval(timer);
- }
+ if(timer) clearInterval(timer);
 
 
  document.getElementById("personTitle").textContent=
   name
-   ? `${name}, sizning hayotingiz`
-   : "Sizning hayotingiz";
+   ? `${name}, ${translations[currentLang].yourLife.toLowerCase()}`
+   : translations[currentLang].yourLife;
 
 
  document.getElementById("birthInfo").textContent=
-  "Tug‘ilgan sana: "+formatDate(birthDate);
+  translations[currentLang].birthInfo+" "+
+  formatDate(birthDate);
 
 
  document.getElementById("result")
@@ -1614,30 +1611,107 @@ function startCalculation(){
 
 
  setTimeout(()=>{
-
   update();
-
   timer=setInterval(update,1000);
-
  },3300);
 
 
  setTimeout(()=>{
-
   document.getElementById("result")
    .scrollIntoView({
     behavior:"smooth",
     block:"start"
    });
-
  },100);
 
 }
 
 
-/* =========================
-   BIRINCHI ANIMATSIYA
-========================= */
+/* =====================================================
+   AGE
+===================================================== */
+
+function getAge(){
+
+ const now=new Date();
+
+ let years=
+  now.getFullYear()-
+  birthDate.getFullYear();
+
+ let anniversary=new Date(
+  now.getFullYear(),
+  birthDate.getMonth(),
+  birthDate.getDate(),
+  birthDate.getHours(),
+  birthDate.getMinutes(),
+  birthDate.getSeconds()
+ );
+
+ if(now<anniversary) years--;
+
+
+ let lastBirthday=new Date(
+  birthDate.getFullYear()+years,
+  birthDate.getMonth(),
+  birthDate.getDate(),
+  birthDate.getHours(),
+  birthDate.getMinutes(),
+  birthDate.getSeconds()
+ );
+
+
+ let temp=new Date(lastBirthday);
+ let months=0;
+
+ while(true){
+
+  let next=new Date(temp);
+  next.setMonth(next.getMonth()+1);
+
+  if(next<=now){
+   months++;
+   temp=next;
+  }else break;
+
+ }
+
+
+ const diff=now-temp;
+
+ const totalSeconds=Math.floor(diff/1000);
+
+ const days=Math.floor(totalSeconds/86400);
+
+ const weeks=Math.floor(days/7);
+
+ const hours=Math.floor(
+  (totalSeconds%86400)/3600
+ );
+
+ const minutes=Math.floor(
+  (totalSeconds%3600)/60
+ );
+
+ const seconds=totalSeconds%60;
+
+
+ return{
+  years,
+  months,
+  weeks,
+  days,
+  hours,
+  minutes,
+  seconds
+ };
+
+}
+
+
+/* =====================================================
+   ANIMATION
+===================================================== */
 
 function animateInitial(){
 
@@ -1659,201 +1733,28 @@ function animateInitial(){
 }
 
 
-/* =========================
-   YOSHNI HISOBLASH
-========================= */
-
-function getAge(){
-
- const now=new Date();
-
- let years=
-  now.getFullYear()-
-  birthDate.getFullYear();
-
-
- let anniversary=new Date(
-  now.getFullYear(),
-  birthDate.getMonth(),
-  birthDate.getDate(),
-  birthDate.getHours(),
-  birthDate.getMinutes(),
-  birthDate.getSeconds()
- );
-
-
- if(now<anniversary){
-  years--;
- }
-
-
- let lastBirthday=new Date(
-  birthDate.getFullYear()+years,
-  birthDate.getMonth(),
-  birthDate.getDate(),
-  birthDate.getHours(),
-  birthDate.getMinutes(),
-  birthDate.getSeconds()
- );
-
-
- let temp=new Date(lastBirthday);
-
- let months=0;
-
-
- while(true){
-
-  let next=new Date(temp);
-
-  next.setMonth(
-   next.getMonth()+1
-  );
-
-
-  if(next<=now){
-
-   months++;
-   temp=next;
-
-  }else{
-
-   break;
-
-  }
-
- }
-
-
- const diff=now-temp;
-
- const totalSeconds=
-  Math.floor(diff/1000);
-
- const days=
-  Math.floor(totalSeconds/86400);
-
- const weeks=
-  Math.floor(days/7);
-
- const hours=
-  Math.floor(
-   (totalSeconds%86400)/3600
-  );
-
- const minutes=
-  Math.floor(
-   (totalSeconds%3600)/60
-  );
-
- const seconds=
-  totalSeconds%60;
-
-
- return{
-  years,
-  months,
-  weeks,
-  days,
-  hours,
-  minutes,
-  seconds
- };
-
-}
-
-
-/* =========================
-   UMUMIY VAQT
-========================= */
-
-function updateTotal(){
-
- const now=new Date();
-
- const diff=
-  now-birthDate;
-
- const totalSeconds=
-  Math.floor(diff/1000);
-
- const totalMinutes=
-  Math.floor(totalSeconds/60);
-
- const totalHours=
-  Math.floor(totalSeconds/3600);
-
- const totalDays=
-  Math.floor(totalSeconds/86400);
-
- const totalWeeks=
-  Math.floor(totalDays/7);
-
-
- let totalMonths=
-  (now.getFullYear()-birthDate.getFullYear())*12+
-  (now.getMonth()-birthDate.getMonth());
-
-
- if(
-  now.getDate()<birthDate.getDate()
- ){
-
-  totalMonths--;
-
- }
-
-
- totalMonths=Math.max(0,totalMonths);
-
-
- const totalYears=
-  Math.floor(totalMonths/12);
-
-
- setTotal("totalYears",totalYears);
- setTotal("totalMonths",totalMonths);
- setTotal("totalWeeks",totalWeeks);
- setTotal("totalDays",totalDays);
- setTotal("totalHours",totalHours);
- setTotal("totalMinutes",totalMinutes);
- setTotal("totalSeconds",totalSeconds);
-
-
- document.getElementById("sentence").textContent=
-  `${totalMonths.toLocaleString("uz-UZ")} oy, `+
-  `${totalWeeks.toLocaleString("uz-UZ")} hafta, `+
-  `${totalDays.toLocaleString("uz-UZ")} kun, `+
-  `${totalMinutes.toLocaleString("uz-UZ")} daqiqa va `+
-  `${totalSeconds.toLocaleString("uz-UZ")} soniya`;
-
-}
-
-
-/* =========================
-   REAL TIME
-========================= */
+/* =====================================================
+   UPDATE
+===================================================== */
 
 function update(){
 
  const age=getAge();
 
-
  ids.forEach(id=>{
 
-  const element=
-   document.getElementById(id);
+  const element=document.getElementById(id);
 
   const value=
-   Number(age[id]).toLocaleString("uz-UZ");
-
+   Number(age[id]).toLocaleString(
+    currentLang==="en" ? "en-US" :
+    currentLang==="ru" ? "ru-RU" :
+    "uz-UZ"
+   );
 
   if(element.textContent!==value){
 
-   setNumber(
-    element,
-    age[id]
-   );
+   setNumber(element,age[id]);
 
   }
 
@@ -1865,10 +1766,6 @@ function update(){
 }
 
 
-/* =========================
-   RAQAM ANIMATSIYASI
-========================= */
-
 function setNumber(element,value){
 
  element.classList.remove("animate");
@@ -1876,50 +1773,129 @@ function setNumber(element,value){
  void element.offsetWidth;
 
  element.textContent=
-  Number(value).toLocaleString("uz-UZ");
+  Number(value).toLocaleString(
+   currentLang==="en" ? "en-US" :
+   currentLang==="ru" ? "ru-RU" :
+   "uz-UZ"
+  );
 
  element.classList.add("animate");
 
 }
 
 
-function setTotal(id,value){
+/* =====================================================
+   TOTAL TIME
+===================================================== */
 
- const element=
-  document.getElementById(id);
+function updateTotal(){
 
- element.textContent=
-  Number(value).toLocaleString("uz-UZ");
+ const now=new Date();
+
+ const diff=now-birthDate;
+
+ const totalSeconds=Math.floor(diff/1000);
+ const totalMinutes=Math.floor(totalSeconds/60);
+ const totalHours=Math.floor(totalSeconds/3600);
+ const totalDays=Math.floor(totalSeconds/86400);
+ const totalWeeks=Math.floor(totalDays/7);
+
+ let totalMonths=
+  (now.getFullYear()-birthDate.getFullYear())*12+
+  (now.getMonth()-birthDate.getMonth());
+
+ if(now.getDate()<birthDate.getDate()){
+  totalMonths--;
+ }
+
+ totalMonths=Math.max(0,totalMonths);
+
+ const totalYears=Math.floor(totalMonths/12);
+
+
+ setTotal("totalYears",totalYears);
+ setTotal("totalMonths",totalMonths);
+ setTotal("totalWeeks",totalWeeks);
+ setTotal("totalDays",totalDays);
+ setTotal("totalHours",totalHours);
+ setTotal("totalMinutes",totalMinutes);
+ setTotal("totalSeconds",totalSeconds);
+
+
+ const locale=
+  currentLang==="en" ? "en-US" :
+  currentLang==="ru" ? "ru-RU" :
+  "uz-UZ";
+
+
+ const n=v=>Number(v).toLocaleString(locale);
+
+
+ if(currentLang==="uz"){
+
+  document.getElementById("sentence").textContent=
+   `${n(totalMonths)} oy, ${n(totalWeeks)} hafta, `+
+   `${n(totalDays)} kun, ${n(totalMinutes)} daqiqa `+
+   `va ${n(totalSeconds)} soniya`;
+
+ }
+
+ else if(currentLang==="ru"){
+
+  document.getElementById("sentence").textContent=
+   `${n(totalMonths)} месяцев, ${n(totalWeeks)} недель, `+
+   `${n(totalDays)} дней, ${n(totalMinutes)} минут `+
+   `и ${n(totalSeconds)} секунд`;
+
+ }
+
+ else{
+
+  document.getElementById("sentence").textContent=
+   `${n(totalMonths)} months, ${n(totalWeeks)} weeks, `+
+   `${n(totalDays)} days, ${n(totalMinutes)} minutes `+
+   `and ${n(totalSeconds)} seconds`;
+
+ }
 
 }
 
 
-/* =========================
-   SANA FORMAT
-========================= */
+function setTotal(id,value){
+
+ const locale=
+  currentLang==="en" ? "en-US" :
+  currentLang==="ru" ? "ru-RU" :
+  "uz-UZ";
+
+ document.getElementById(id).textContent=
+  Number(value).toLocaleString(locale);
+
+}
+
+
+/* =====================================================
+   DATE
+===================================================== */
 
 function formatDate(date){
 
- const months=[
-  "yanvar",
-  "fevral",
-  "mart",
-  "aprel",
-  "may",
-  "iyun",
-  "iyul",
-  "avgust",
-  "sentabr",
-  "oktabr",
-  "noyabr",
-  "dekabr"
- ];
+ const locale=
+  currentLang==="en" ? "en-US" :
+  currentLang==="ru" ? "ru-RU" :
+  "uz-UZ";
 
-
- return `${date.getDate()}-${months[date.getMonth()]}-${date.getFullYear()} `+
-        `${String(date.getHours()).padStart(2,"0")}:`+
-        `${String(date.getMinutes()).padStart(2,"0")}:`+
-        `${String(date.getSeconds()).padStart(2,"0")}`;
+ return new Intl.DateTimeFormat(
+  locale,
+  {
+   day:"numeric",
+   month:"long",
+   year:"numeric",
+   hour:"2-digit",
+   minute:"2-digit",
+   second:"2-digit"
+  }
+ ).format(date);
 
 }
 
